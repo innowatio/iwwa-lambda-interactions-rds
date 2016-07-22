@@ -26,15 +26,21 @@ describe("`interactions` on RDS", () => {
 
     afterEach(async () => {
         await db.query({
-            text: "DELETE FROM pageview"
+            text: "DELETE FROM pageview; DELETE FROM visit"
+        });
+    });
+
+    after(async () => {
+        await db.query({
+            text: "DELETE FROM user_app"
         });
     });
 
     it("INSERT with new visit", async () => {
         const event = getEventFromObject({
             data: {
+                id: 1,
                 element: {
-                    id: 1,
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
@@ -58,9 +64,10 @@ describe("`interactions` on RDS", () => {
         }).to.deep.equal({
             id: undefined,
             visit_id: "visit-1",
-            date: moment("2016-01-01T00:00:00").toDate(),
+            date: moment("2016-01-01").toDate(),
             time: "01:02:03",
             time_spent: null,
+            full_timestamp: new Date("2016-01-01T01:02:03Z"),
             device: null,
             application: null,
             page_name: "home"
@@ -68,12 +75,11 @@ describe("`interactions` on RDS", () => {
     });
 
     it("INSERT with existing visit", async () => {
-        // id, user_app_id, date, time, time_spent, device, application
-        await findOrCreateVisit(1, 1);
+        await findOrCreateVisit(1, "id-user-1");
         const event = getEventFromObject({
             data: {
+                id: 1,
                 element: {
-                    id: 1,
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
@@ -101,6 +107,7 @@ describe("`interactions` on RDS", () => {
             date: moment("2016-01-01T00:00:00").toDate(),
             time: "01:02:03",
             time_spent: "00:01:10",
+            full_timestamp: new Date("2016-01-01T01:02:03Z"),
             device: null,
             application: null,
             page_name: "home"
