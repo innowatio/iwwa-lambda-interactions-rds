@@ -1,11 +1,11 @@
 {
-  "name": "lambda-boilerplate",
+  "name": "iwwa-lambda-interactions-rds",
   "version": "1.0.0",
   "description": "Lambda boiler plate",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lk-architecture/lambda-boilerplate"
+    "url": "https://github.com/innowatio/iwwa-lambda-interactions-rds"
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
