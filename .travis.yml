@@ -7,6 +7,6 @@ services:
   - postgresql
 
 script:
-  - npm run coverage
-  - npm run codecov
+  #- npm run coverage
+  #- npm run codecov
   - npm run lint
