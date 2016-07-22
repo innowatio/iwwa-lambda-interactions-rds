@@ -1,14 +1,27 @@
-[![Build Status](https://travis-ci.org/lk-architecture/lambda-boilerplate.svg?branch=master)](https://travis-ci.org/lk-architecture/lambda-boilerplate)
-[![Dependency Status](https://david-dm.org/lk-architecture/lambda-boilerplate.svg)](https://david-dm.org/lk-architecture/lambda-boilerplate)
-[![devDependency Status](https://david-dm.org/lk-architecture/lambda-boilerplate/dev-status.svg)](https://david-dm.org/lk-architecture/lambda-boilerplate#info=devDependencies)
+[![Build Status](https://travis-ci.org/innowatio/iwwa-lambda-interactions-rds.svg?branch=master)](https://travis-ci.org/innowatio/iwwa-lambda-interactions-rds)
+[![Dependency Status](https://david-dm.org/innowatio/iwwa-lambda-interactions-rds.svg)](https://david-dm.org/innowatio/iwwa-lambda-interactions-rds)
+[![devDependency Status](https://david-dm.org/innowatio/iwwa-lambda-interactions-rds/dev-status.svg)](https://david-dm.org/innowatio/iwwa-lambda-interactions-rds#info=devDependencies)
 
-# Lambda Boilerplate
+# Iwwa lambda interactions rds
 
-Lambda boilerplate project.
+Stores user interaction events on RDS.
 
-After cloning the repository, run `npm install` to install all dependencies.
-Entry point for all yours implementations is `src/pipeline`.
+## Deployment
+
+This project deployment is automated with Lambdafile lambda-boilerplate.
+
 
 ## Configuration
 
-The application can be configured using a `.env` file (key=value format).
+The following environment variables are needed to configure the function:
+
+    DB_USER
+    DB_PASS
+    DB_URL
+    DB_NAME
+
+
+## Run test
+
+In order to run tests locally a Postgres instance and the above environment variables are needed. Then, just run npm run test command.
+(A postgres DB is required)
