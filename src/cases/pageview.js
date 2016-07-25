@@ -6,10 +6,9 @@ export async function savePageview (interaction) {
 
     const utcTimestamp = moment.utc(interaction.timestamp);
 
-
     // VISIT
     // id, user_app_id, date, time, time_spent, zulu_time, device, application
-    const visitParams = [
+    await findOrCreateVisit(
         interaction.visitId,
         interaction.userId,
         utcTimestamp.format("YYYY-MM-DD"),
@@ -18,8 +17,7 @@ export async function savePageview (interaction) {
         interaction.timestamp,
         interaction.device,
         interaction.application
-    ];
-    await findOrCreateVisit(...visitParams);
+    );
 
     // PAGEVIEW
     // id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name
