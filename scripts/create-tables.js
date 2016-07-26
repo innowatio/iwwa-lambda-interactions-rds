@@ -41,7 +41,7 @@ export const createTestDB = `
 
     CREATE TABLE IF NOT EXISTS page_view
     (
-        id serial NOT NULL,
+        id character varying(256) NOT NULL,
         visit_id character varying(256),
         date date,
         "time" time without time zone,

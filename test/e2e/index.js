@@ -39,7 +39,7 @@ describe("`interactions` on RDS", () => {
     it("INSERT with new visit", async () => {
         const event = getEventFromObject({
             data: {
-                id: 1,
+                id: "1",
                 element: {
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
@@ -58,11 +58,8 @@ describe("`interactions` on RDS", () => {
         const result = await db.rows("SELECT * from page_view");
 
         expect(result.length).to.equal(1);
-        expect({
-            ...result[0],
-            id: undefined
-        }).to.deep.equal({
-            id: undefined,
+        expect(result[0]).to.deep.equal({
+            id: "1",
             visit_id: "visit-1",
             date: moment("2016-01-01").toDate(),
             time: "01:02:03",
@@ -75,10 +72,10 @@ describe("`interactions` on RDS", () => {
     });
 
     it("INSERT with existing visit", async () => {
-        await findOrCreateVisit(1, "id-user-1");
+        await findOrCreateVisit("visit-1", "id-user-1");
         const event = getEventFromObject({
             data: {
-                id: 1,
+                id: "1",
                 element: {
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
@@ -98,12 +95,8 @@ describe("`interactions` on RDS", () => {
         const result = await db.rows("SELECT * from page_view");
 
         expect(result.length).to.equal(1);
-        expect(result[0].id).to.be.a("number");
-        expect({
-            ...result[0],
-            id: undefined
-        }).to.deep.equal({
-            id: undefined,
+        expect(result[0]).to.deep.equal({
+            id: "1",
             visit_id: "visit-1",
             date: moment("2016-01-01T00:00:00").toDate(),
             time: "01:02:03",
