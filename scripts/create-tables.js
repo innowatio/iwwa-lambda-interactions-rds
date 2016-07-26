@@ -39,7 +39,7 @@ export const createTestDB = `
 
     --  PAGEVIEW
 
-    CREATE TABLE IF NOT EXISTS pageview
+    CREATE TABLE IF NOT EXISTS page_view
     (
         id serial NOT NULL,
         visit_id character varying(256),

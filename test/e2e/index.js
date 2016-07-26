@@ -26,7 +26,7 @@ describe("`interactions` on RDS", () => {
 
     afterEach(async () => {
         await db.query({
-            text: "DELETE FROM pageview; DELETE FROM visit"
+            text: "DELETE FROM page_view; DELETE FROM visit"
         });
     });
 
@@ -55,7 +55,7 @@ describe("`interactions` on RDS", () => {
 
         await run(handler, event);
 
-        const result = await db.rows("SELECT * from pageview");
+        const result = await db.rows("SELECT * from page_view");
 
         expect(result.length).to.equal(1);
         expect({
@@ -95,9 +95,10 @@ describe("`interactions` on RDS", () => {
 
         await run(handler, event);
 
-        const result = await db.rows("SELECT * from pageview");
+        const result = await db.rows("SELECT * from page_view");
 
         expect(result.length).to.equal(1);
+        expect(result[0].id).to.be.a("number");
         expect({
             ...result[0],
             id: undefined
