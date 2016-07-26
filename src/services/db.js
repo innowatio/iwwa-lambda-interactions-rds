@@ -29,7 +29,7 @@ export async function findOrCreateVisit (id, user_app_id, date, time, time_spent
 export async function insertPageview (id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name) {
     const db = await getClient();
     return db.query(`
-        INSERT INTO pageview
+        INSERT INTO page_view
             (id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         ON CONFLICT DO NOTHING`,
