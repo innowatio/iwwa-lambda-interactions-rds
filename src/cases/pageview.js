@@ -6,6 +6,9 @@ export async function savePageview (interaction) {
 
     const utcTimestamp = moment.utc(interaction.timestamp);
 
+    const device = getDeviceName(interaction.details);
+
+
     // VISIT
     // id, user_app_id, date, time, time_spent, zulu_time, device, application
     await findOrCreateVisit(
@@ -15,7 +18,7 @@ export async function savePageview (interaction) {
         utcTimestamp.format("HH:mm:ss"),
         "00:01:20",
         interaction.timestamp,
-        interaction.device,
+        device,
         interaction.application
     );
 
@@ -28,8 +31,18 @@ export async function savePageview (interaction) {
         utcTimestamp.format("HH:mm:ss"),
         interaction.timeSpent,
         interaction.timestamp,
-        interaction.device,
+        device,
         interaction.application,
         interaction.view
     );
+}
+
+export function getDeviceName (details) {
+    if (!details) {
+        return "";
+    }
+    return [details.platform, details.version]
+        .filter(detail => detail !== undefined && detail !== null)
+        .join(" ")
+        .trim();
 }

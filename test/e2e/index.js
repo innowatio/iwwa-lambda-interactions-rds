@@ -44,6 +44,9 @@ describe("`interactions` on RDS", () => {
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
+                    details: {
+                        platform: "Android"
+                    },
                     body: {
                         visitId: "visit-1",
                         view: "home"
@@ -65,7 +68,7 @@ describe("`interactions` on RDS", () => {
             time: "01:02:03",
             time_spent: null,
             full_timestamp: new Date("2016-01-01T01:02:03Z"),
-            device: null,
+            device: "Android",
             application: null,
             page_name: "home"
         });
@@ -80,6 +83,9 @@ describe("`interactions` on RDS", () => {
                     userId: "id-user-1",
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
+                    details: {
+                        platform: "Android"
+                    },
                     body: {
                         visitId: "visit-1",
                         view: "home",
@@ -102,7 +108,7 @@ describe("`interactions` on RDS", () => {
             time: "01:02:03",
             time_spent: "00:01:10",
             full_timestamp: new Date("2016-01-01T01:02:03Z"),
-            device: null,
+            device: "Android",
             application: null,
             page_name: "home"
         });
