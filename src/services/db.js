@@ -15,6 +15,13 @@ export function getClient () {
     return db;
 }
 
+export async function findUserOnDatabase (userId) {
+    const db = await getClient();
+    return db.rows(`
+        SELECT * FROM user_app WHERE Id = $1`,
+        userId);
+}
+
 export async function findOrCreateVisit (id, user_app_id, date, time, time_spent, full_timestamp, device, application) {
     const db = await getClient();
     return db.query(`

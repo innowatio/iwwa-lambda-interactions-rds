@@ -1,5 +1,7 @@
 import {INTERACTION_PAGEVIEW} from "config";
 import {savePageview} from "cases/pageview";
+import {findUserOnDatabase} from "services/db";
+
 
 export default async function pipeline (event) {
 
@@ -11,7 +13,13 @@ export default async function pipeline (event) {
         return null;
     }
 
-    if (!interaction || !interaction.type|| !interaction.body) {
+    if (!(interaction && interaction.type  && interaction.body  && interaction.userId)) {
+        return null;
+    }
+
+    // skip if user not found
+    const userOnDB = await findUserOnDatabase(interaction.userId);
+    if (userOnDB.length < 1) {
         return null;
     }
 
