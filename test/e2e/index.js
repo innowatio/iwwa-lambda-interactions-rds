@@ -88,7 +88,9 @@ describe("`interactions` on RDS", () => {
                         userId: "id-user-1",
                         timestamp: "2016-01-01T01:02:03Z",
                         details: {
-                            platform: "Android"
+                            platform: "Android",
+                            bundle: "com.my.app",
+                            appVersion: "1.0.1"
                         },
                         body: {
                             visitId: "visit-1",
@@ -115,7 +117,9 @@ describe("`interactions` on RDS", () => {
                         type: INTERACTION_PAGEVIEW,
                         timestamp: "2016-01-01T01:02:03Z",
                         details: {
-                            platform: "Android"
+                            platform: "Android",
+                            bundle: "com.my.app",
+                            appVersion: "1.0.1"
                         }
                     }
                 },
@@ -140,7 +144,9 @@ describe("`interactions` on RDS", () => {
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
                     details: {
-                        platform: "Android"
+                        platform: "Android",
+                        bundle: "com.my.app",
+                        appVersion: "1.0.1"
                     },
                     body: {
                         visitId: "visit-1",
@@ -164,7 +170,7 @@ describe("`interactions` on RDS", () => {
             time_spent: null,
             full_timestamp: new Date("2016-01-01T01:02:03Z"),
             device: "Android",
-            application: null,
+            application: "com.my.app 1.0.1",
             page_name: "home"
         });
     });
@@ -179,7 +185,9 @@ describe("`interactions` on RDS", () => {
                     type: INTERACTION_PAGEVIEW,
                     timestamp: "2016-01-01T01:02:03Z",
                     details: {
-                        platform: "Android"
+                        platform: "Android",
+                        bundle: "com.my.app",
+                        appVersion: "1.0.1"
                     },
                     body: {
                         visitId: "visit-1",
@@ -204,7 +212,7 @@ describe("`interactions` on RDS", () => {
             time_spent: "00:01:10",
             full_timestamp: new Date("2016-01-01T01:02:03Z"),
             device: "Android",
-            application: null,
+            application: "com.my.app 1.0.1",
             page_name: "home"
         });
     });

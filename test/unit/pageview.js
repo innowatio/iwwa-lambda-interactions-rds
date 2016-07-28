@@ -1,6 +1,6 @@
 import {expect} from "chai";
 
-import {getDeviceName} from "cases/pageview";
+import {getDeviceName, getApplicationName} from "cases/pageview";
 
 
 describe("`getDeviceName`", () => {
@@ -24,5 +24,29 @@ describe("`getDeviceName`", () => {
         expect("").to.equal(getDeviceName(null));
         expect("").to.equal(getDeviceName(undefined));
         expect("").to.equal(getDeviceName({}));
+    });
+});
+
+describe("`getApplicationName`", () => {
+
+    it("returns the correct value if details are given", () => {
+        expect("com.my.app").to.equal(getApplicationName({
+            bundle: "com.my.app"
+        }));
+
+        expect("1.0.1").to.equal(getApplicationName({
+            appVersion: "1.0.1"
+        }));
+
+        expect("com.my.app 1.0.1").to.equal(getApplicationName({
+            bundle: "com.my.app",
+            appVersion: "1.0.1"
+        }));
+    });
+
+    it("returns empty string if details are missing", () => {
+        expect("").to.equal(getApplicationName(null));
+        expect("").to.equal(getApplicationName(undefined));
+        expect("").to.equal(getApplicationName({}));
     });
 });
