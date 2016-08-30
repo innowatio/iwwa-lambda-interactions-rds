@@ -1,6 +1,7 @@
 import {INTERACTION_PAGEVIEW} from "config";
 import {savePageview} from "cases/pageview";
 import {findUserOnDatabase} from "services/db";
+import log from "services/logger";
 
 
 export default async function pipeline (event) {
@@ -13,13 +14,15 @@ export default async function pipeline (event) {
         return null;
     }
 
-    if (!(interaction && interaction.type  && interaction.body  && interaction.userId)) {
+    if (!(interaction && interaction.type  && interaction.body && interaction.userId)) {
+        log.info(interaction, "Malformed event");
         return null;
     }
 
     // skip if user not found
     const userOnDB = await findUserOnDatabase(interaction.userId);
     if (userOnDB.length < 1) {
+        log.info(`User not found on DB '${interaction.userId}'`);
         return null;
     }
 

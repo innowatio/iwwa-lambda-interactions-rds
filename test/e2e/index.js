@@ -80,6 +80,33 @@ describe("`interactions` on RDS", () => {
             expect(result.length).to.equal(0);
         });
 
+        it("if `userId` is not on database", async () => {
+            const event = getEventFromObject({
+                data: {
+                    id: "1",
+                    element: {
+                        userId: "id-user-2",
+                        type: INTERACTION_PAGEVIEW,
+                        timestamp: "2016-01-01T01:02:03Z",
+                        details: {
+                            platform: "Android"
+                        },
+                        body: {
+                            visitId: "visit-1",
+                            view: "home"
+                        }
+                    }
+                },
+                type: "element inserted in collection user-interactions"
+            });
+
+            await run(handler, event);
+
+            const result = await db.rows("SELECT * from page_view");
+
+            expect(result.length).to.equal(0);
+        });
+
         it("if `type` is missing", async () => {
             const event = getEventFromObject({
                 data: {
