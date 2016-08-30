@@ -18,10 +18,10 @@ describe("`interactions` on RDS", () => {
         // insert an user
         await db.query(
             `INSERT INTO user_app
-                (id, user_name)
-                VALUES ($1, $2)
+                (id, user_name, external_uid)
+                VALUES ($1, $2, $3)
                 ON CONFLICT DO NOTHING`,
-            "id-user-1", "test-user-1");
+            1, "test-user-1", "id-user-1");
     });
 
     afterEach(async () => {
@@ -176,7 +176,7 @@ describe("`interactions` on RDS", () => {
     });
 
     it("INSERT with existing visit", async () => {
-        await findOrCreateVisit("visit-1", "id-user-1");
+        await findOrCreateVisit("visit-1", 1);
         const event = getEventFromObject({
             data: {
                 id: "1",

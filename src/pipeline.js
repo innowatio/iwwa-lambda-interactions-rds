@@ -29,7 +29,8 @@ export default async function pipeline (event) {
             ...interaction,
             ...interaction.body,
             id: id
-        });
+        },
+        userOnDB[0].id);
 
         break;
     default:

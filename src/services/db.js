@@ -18,7 +18,7 @@ export function getClient () {
 export async function findUserOnDatabase (userId) {
     const db = await getClient();
     return db.rows(`
-        SELECT * FROM user_app WHERE Id = $1`,
+        SELECT * FROM user_app WHERE external_uid = $1`,
         userId);
 }
 

@@ -4,7 +4,7 @@ export const createTestDB = `
 
     CREATE TABLE IF NOT EXISTS user_app
     (
-        id character varying(256) NOT NULL,
+        id serial NOT NULL,
         user_name character varying(256),
         street character varying(256),
         street_number character varying(256),
@@ -13,6 +13,7 @@ export const createTestDB = `
         user_since timestamp without time zone,
         customer_since timestamp without time zone,
         name character varying(256),
+        external_uid character varying(256),
         province_id integer,
         CONSTRAINT user_app_pkey PRIMARY KEY (id)
     );
@@ -23,7 +24,7 @@ export const createTestDB = `
     CREATE TABLE IF NOT EXISTS visit
     (
         id character varying(256) NOT NULL,
-        user_app_id character varying(256),
+        user_app_id integer,
         date date,
         "time" time without time zone,
         time_spent time without time zone,

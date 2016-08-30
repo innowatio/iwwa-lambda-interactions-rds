@@ -2,7 +2,7 @@ import {findOrCreateVisit, insertPageview} from "../services/db";
 import moment from "moment";
 
 
-export async function savePageview (interaction) {
+export async function savePageview (interaction, userId) {
 
     const utcTimestamp = moment.utc(interaction.timestamp);
 
@@ -14,7 +14,7 @@ export async function savePageview (interaction) {
     // id, user_app_id, date, time, time_spent, zulu_time, device, application
     await findOrCreateVisit(
         interaction.visitId,
-        interaction.userId,
+        userId,
         utcTimestamp.format("YYYY-MM-DD"),
         utcTimestamp.format("HH:mm:ss"),
         "00:01:20",
