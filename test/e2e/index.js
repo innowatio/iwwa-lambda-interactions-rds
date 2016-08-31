@@ -1,5 +1,4 @@
 import {expect} from "chai";
-import moment from "moment";
 
 import {handler} from "index";
 import {getEventFromObject, run} from "../mocks";
@@ -192,10 +191,8 @@ describe("`interactions` on RDS", () => {
         expect(result[0]).to.deep.equal({
             id: "1",
             visit_id: "visit-1",
-            date: moment("2016-01-01").toDate(),
-            time: "01:02:03",
             time_spent: null,
-            full_timestamp: new Date("2016-01-01T01:02:03Z"),
+            datetime: new Date("2016-01-01T01:02:03Z"),
             device: "Android",
             application: "com.my.app 1.0.1",
             page_name: "home"
@@ -234,10 +231,8 @@ describe("`interactions` on RDS", () => {
         expect(result[0]).to.deep.equal({
             id: "1",
             visit_id: "visit-1",
-            date: moment("2016-01-01T00:00:00").toDate(),
-            time: "01:02:03",
             time_spent: "00:01:10",
-            full_timestamp: new Date("2016-01-01T01:02:03Z"),
+            datetime: new Date("2016-01-01T01:02:03Z"),
             device: "Android",
             application: "com.my.app 1.0.1",
             page_name: "home"

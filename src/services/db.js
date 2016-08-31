@@ -22,23 +22,23 @@ export async function findUserOnDatabase (userId) {
         userId);
 }
 
-export async function findOrCreateVisit (id, user_app_id, date, time, time_spent, full_timestamp, device, application) {
+export async function findOrCreateVisit (id, user_app_id, datetime, time_spent, device, application) {
     const db = await getClient();
     return db.query(`
         INSERT INTO visit
-            (id, user_app_id, date, time, time_spent, full_timestamp, device, application)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            (id, user_app_id, datetime, time_spent, device, application)
+            VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT DO NOTHING`,
         // TODO update fields
-        id, user_app_id, date, time, time_spent, full_timestamp, device, application);
+        id, user_app_id, datetime, time_spent, device, application);
 }
 
-export async function insertPageview (id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name) {
+export async function insertPageview (id, visit_id, datetime, time_spent, device, application, page_name) {
     const db = await getClient();
     return db.query(`
         INSERT INTO page_view
-            (id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            (id, visit_id, datetime, time_spent, device, application, page_name)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT DO NOTHING`,
-        id, visit_id, date, time, time_spent, full_timestamp, device, application, page_name);
+        id, visit_id, datetime, time_spent, device, application, page_name);
 }
